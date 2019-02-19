@@ -133,6 +133,42 @@
           }
         }
       }
+    },
+    "ff-tooltip": {
+      "root": "projects/ff-tooltip",
+      "sourceRoot": "projects/ff-tooltip/src",
+      "projectType": "library",
+      "prefix": "ff",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/ff-tooltip/tsconfig.lib.json",
+            "project": "projects/ff-tooltip/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ff-tooltip/src/test.ts",
+            "tsConfig": "projects/ff-tooltip/tsconfig.spec.json",
+            "karmaConfig": "projects/ff-tooltip/karma.conf.js",
+            "codeCoverage": true
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/ff-tooltip/tsconfig.lib.json",
+              "projects/ff-tooltip/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "ff-tooltip-app"

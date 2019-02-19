@@ -17,6 +17,14 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "ff-tooltip": [
+        "dist/ff-tooltip"
+      ],
+      "ff-tooltip/*": [
+        "dist/ff-tooltip/*"
+      ]
+    }
   }
 }
