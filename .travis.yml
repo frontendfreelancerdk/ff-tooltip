@@ -3,12 +3,12 @@ addons:
   chrome: stable
 language: node_js
 node_js:
-  - node
+- node
 script:
-  - npm run test_lib
-  - npm run build_lib
+- npm run test_lib
+- npm run build_lib
 before_deploy:
-  - cd dist/ff-tooltip
+- cd dist/ff-tooltip
 deploy:
   provider: npm
   skip_cleanup: true
@@ -16,3 +16,5 @@ deploy:
   on:
     tags: true
     branch: master
+  api_key:
+    secure: znKV8HcbYqsOUb+vVxGvE8gyInrEqagC+w0xMoH/OFSu7S0eNO47TXQ5ApwnyylIDWflRyXaDtRFhe36sjIpBE5DuUNi537B6K+8UNBoG0nLlsImv7LjVR1g9q/WaaA63IRTLR5g1AodQfCpe85Yz7hirLvzAyvEAxjOEN1v4X8MAvdmPgIWEzSPEU+Gq+SLZA5yF4KsQETCno1crAnqmAoNL8RrNt/dyVfd3JD4oD9HnNvjeGhnzLt8R5WC4kYW+iMaUER/c2luVwNnDW/sD2dwGhjeVhAhQLRjLC3o1Y4nCduphVId2QezCV1Qidu50E5uN0z60Eo5eb817GGNFnMdkm391mJEf5AJ76ZAwhIHIWEx/+r0b98f4c7anfDyYLriXtpkxxNvlN4n2fj55n8dly1taaNe4KTbiL3JubOszIk+5REAtOFIJACXHPErWGv/wsor57ujOMfqDmdZygfmWF84WVWTIFE6dZNGIEKvYREXcuOqgAm3FLdcm2+H6Rd/gdoZoR62Wp+UiBjXxzbWjquMHpzz5EikiBlQm7l6V8wLsLGJaZQRlXbZYXsh+XELykn7wIgjuwUw3UeppJQ9orCNSTWJ6NEf0UVfzejFsFyrljNCKrR+FmJ4smQoigPG2MGt+Q8bNAz0n9lPN92Nr2khZ4wVmpV84s9Ynoc=
