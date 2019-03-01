@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
-import { FFTooltipComponent } from './ff-tooltip.component';
+import { FfTooltipDirective } from './ff-tooltip.directive';
+import { FfTooltipComponent } from './ff-tooltip/ff-tooltip.component';
 
 @NgModule({
-  declarations: [FFTooltipComponent],
-  imports: [
-  ],
-  exports: [FFTooltipComponent]
+  declarations: [FfTooltipDirective, FfTooltipComponent],
+  imports     : [],
+  exports     : [FfTooltipDirective],
+  entryComponents: [FfTooltipComponent]
 })
-export class FFTooltipModule { }
+export class FFTooltipModule {
+}
