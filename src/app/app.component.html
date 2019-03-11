@@ -2,8 +2,27 @@
 <p class="forSize"></p>
 <div class="wrapper">
   <div class="container">
-    <p ffTooltip [ff-Tooltip]="'hello'">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maiores, veniam?</p>
+    <p ffTooltip [ffTooltip]="text" [ffTooltipPosition]="direction" #tooltip="ffTooltip">Lorem ipsum dolor sit amet, consectetur
+      adipisicing elit. Maiores, veniam?
+      Lorem ipsum dolor sit amet, consectetur
+      adipisicing elit. Maiores, veniam?
+      Lorem ipsum dolor sit amet, consectetur
+      adipisicing elit. Maiores, veniam?
+      Lorem ipsum dolor sit amet, consectetur
+      adipisicing elit. Maiores, veniam?
+      Lorem ipsum dolor sit amet, consectetur
+      adipisicing elit. Maiores, veniam?</p>
+    <button (mouseenter)="tooltip.show()">show</button>
+    <button (mouseenter)="tooltip.hide()">hide</button>
+    <button (mouseenter)="tooltip.toggle()">toggle</button>
+    <hr>
+    <p ffTooltip [ffTooltip]="'lorem'" [ffTooltipPosition]="'top'">Lorem ipsum dolor sit amet, consectetur
+      adipisicing elit. Maiores, veniam?</p>
 
+    <hr>
+    <p ffTooltip [ffTooltip]="'delay'" [ffTooltipPosition]="'bottom'" [ffTooltipShowDelay]="1000" [ffTooltipHideDelay]="2000">Lorem ipsum dolor sit amet, consectetur
+      adipisicing elit. Maiores, veniam?</p>
   </div>
 </div>
+<button [ffTooltip]="'submit btn'" *ngIf="test">t</button>
 <p class="forSize"></p>

@@ -1,3 +1,8 @@
-<p class="ff-tooltip {{theme}} {{position}}">
-  {{text}}
-</p>
+<div class="ff-tooltip-wrapper"
+     [@state]="visibility"
+     (@state.start)="_animationStart($event)"
+     (@state.done)="_animationDone($event)">
+  <div class="ff-tooltip  round dark {{position}}">
+    {{text}}
+  </div>
+</div>

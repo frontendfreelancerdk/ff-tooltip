@@ -1,6 +1,6 @@
 {
   "name": "ff-tooltip-app",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -10,7 +10,8 @@
     "e2e": "ng e2e",
     "test_lib": "ng test ff-tooltip --watch=false --browsers=ChromeHeadless",
     "build_lib": "ng build ff-tooltip",
-    "prebuild_lib": "node copy_readme"
+    "prebuild_lib": "node copy_readme",
+    "watch_lib": "ng build ff-tooltip --watch"
   },
   "private": true,
   "dependencies": {
@@ -23,6 +24,7 @@
     "@angular/platform-browser-dynamic": "~7.1.0",
     "@angular/router": "~7.1.0",
     "core-js": "^2.5.4",
+    "ff-overlay": "0.0.2",
     "rxjs": "~6.3.3",
     "tslib": "^1.9.0",
     "zone.js": "~0.8.26"
