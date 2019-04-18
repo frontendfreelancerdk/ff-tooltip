@@ -1,7 +1,7 @@
 import {
-  AfterViewInit,
+  AfterViewInit, ChangeDetectionStrategy,
   ChangeDetectorRef,
-  Component
+  Component, HostBinding, HostListener, OnInit
 } from '@angular/core';
 import {BehaviorSubject, fromEvent} from 'rxjs';
 import {tooltipState} from '../animation';
@@ -14,9 +14,7 @@ import {tooltipState} from '../animation';
 })
 export class FFTooltipComponent implements AfterViewInit {
   private eventSubscription: any;
-
   public afterHide = new BehaviorSubject(false);
-
   _text = '';
   get text() {
     return this._text;
@@ -36,18 +34,26 @@ export class FFTooltipComponent implements AfterViewInit {
   }
 
 
-  _visibility = 'initial';
-  get visibility() {
-    return this._visibility;
-  }
+  _visibility= 'initial';
 
   set visibility(val) {
     this._visibility = val;
   }
 
-  private _showTimeoutId;
-  private _hideTimeoutId;
+  @HostBinding('@state') get visibility() {
+    return this._visibility;
+  }
 
+  @HostBinding('class') _class = 'ff-tooltip-wrapper';
+
+  @HostListener('@state.start', ['$event']) _animationStart(event) {
+  }
+
+  @HostListener('@state.done', ['$event']) _animationDone(event) {
+    if (event.toState === 'hidden') {
+      this.afterHide.next(true);
+    }
+  }
 
   constructor(private cdRef: ChangeDetectorRef) {
     this.eventSubscription = fromEvent(window, 'scroll').subscribe(e => {
@@ -55,47 +61,25 @@ export class FFTooltipComponent implements AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.cdRef.detectChanges();
+    this._doCheck();
   }
 
   _doCheck() {
     this.cdRef.detectChanges();
   }
 
-  show(delay: number) {
-    console.log('show');
-    if (this._hideTimeoutId) {
-      clearTimeout(this._hideTimeoutId);
-      this._hideTimeoutId = null;
-    }
-    this._showTimeoutId = setTimeout(() => {
-      this.visibility = 'visible';
-    }, delay);
+  show() {
+    this.visibility = 'visible';
+
   }
 
-  hide(delay: number) {
-    console.log('hide');
-    if (this._showTimeoutId) {
-      clearTimeout(this._showTimeoutId);
-      this._showTimeoutId = null;
-    }
-    this._hideTimeoutId = setTimeout(() => {
-      this.visibility = 'hidden';
-    }, delay);
+  hide() {
+    this.visibility = 'hidden';
   }
 
   isVisible(): boolean {
     return this.visibility === 'visible';
   }
 
-  _animationStart(event) {
-    console.log(event);
-  }
 
-  _animationDone(event) {
-    console.log(event);
-    if (event.toState === 'hidden') {
-      this.afterHide.next(true);
-    }
-  }
 }

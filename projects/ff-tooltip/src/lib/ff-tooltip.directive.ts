@@ -1,18 +1,12 @@
 import {
   AfterViewInit,
-  ApplicationRef,
-  ComponentFactoryResolver,
   Directive,
   ElementRef, EmbeddedViewRef,
   HostListener,
-  Injector,
   Input, OnDestroy,
-  OnInit,
-  Renderer2
 } from '@angular/core';
 import {FFTooltipComponent} from './ff-tooltip/ff-tooltip.component';
 import {FFTooltipService} from './ff-tooltip.service';
-import {FFOverlayService} from 'ff-overlay';
 
 export type TooltipPosition = 'top' | 'right' | 'bottom' | 'left';
 
@@ -45,6 +39,8 @@ export class FFTooltipDirective implements AfterViewInit, OnDestroy {
   private _showDelay = this._defaultOptions.showDelay;
   private _hideDelay = this._defaultOptions.hideDelay;
   private _tooltipInstance: any;
+  private _showTimeoutId: any;
+  private _hideTimeoutId: any;
 
   get hideDelay(): number {
     return this._hideDelay;
@@ -66,13 +62,13 @@ export class FFTooltipDirective implements AfterViewInit, OnDestroy {
     return this._position;
   }
 
-  @HostListener('mouseenter', ['$event'])
-  onMouseEnter(event) {
+  @HostListener('mouseenter')
+  onMouseEnter() {
     this.show();
   }
 
-  @HostListener('mouseleave', ['$event'])
-  onMouseLeave(event) {
+  @HostListener('mouseleave')
+  onMouseLeave() {
     this.hide();
   }
 
@@ -110,13 +106,13 @@ export class FFTooltipDirective implements AfterViewInit, OnDestroy {
     this._tooltipInstance = this.tooltip.instance;
     this._tooltipInstance.afterHide.subscribe((val) => {
       if (val) {
-        console.log(this.tooltip);
         const domElem = (this.tooltip.hostView as EmbeddedViewRef<any>)
           .rootNodes[0] as HTMLElement;
         this.service.removeElem(domElem);
         this._tooltipInstance._doCheck();
       }
     });
+    this.service.subscribe(this);
   }
 
   ngAfterViewInit() {
@@ -125,23 +121,39 @@ export class FFTooltipDirective implements AfterViewInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.tooltip.destroy();
+    this.service.unsubscribe(this);
   }
 
   show(ms: number = this.showDelay) {
+    if (this._hideTimeoutId) {
+      clearTimeout(this._hideTimeoutId);
+      this._hideTimeoutId = null;
+    }
     if (this.disabled || !this.text || (this._isTooltipVisible() &&
       !this._tooltipInstance._showTimeoutId && !this._tooltipInstance._hideTimeoutId)) {
       return;
     }
     const domElem = (this.tooltip.hostView as EmbeddedViewRef<any>)
       .rootNodes[0] as HTMLElement;
-    this.service.appendElem(domElem, this.el.nativeElement);
-    this._tooltipInstance._doCheck();
-    this._tooltipInstance.show(ms);
+
+    this._showTimeoutId = setTimeout(() => {
+      this.service.appendElem(domElem, this.el.nativeElement);
+      this._tooltipInstance._doCheck();
+      this._tooltipInstance.show();
+    }, ms);
   }
 
   hide(ms: number = this.hideDelay) {
+
     if (this._tooltipInstance) {
-      this._tooltipInstance.hide(ms);
+      if (this._showTimeoutId) {
+        clearTimeout(this._showTimeoutId);
+        this._showTimeoutId = null;
+      }
+      this._hideTimeoutId = setTimeout(() => {
+        this._tooltipInstance.hide();
+      }, ms);
+
     }
   }
 
