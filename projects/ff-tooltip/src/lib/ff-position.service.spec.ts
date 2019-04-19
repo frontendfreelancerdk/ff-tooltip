@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { FfShowPositionService } from './ff-position.service';
+import { FFPositionService } from './ff-position.service';
 
-describe('FfShowPositionService', () => {
+describe('FFPositionService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: FfShowPositionService = TestBed.get(FfShowPositionService);
+    const service: FFPositionService = TestBed.get(FFPositionService);
     expect(service).toBeTruthy();
   });
 });

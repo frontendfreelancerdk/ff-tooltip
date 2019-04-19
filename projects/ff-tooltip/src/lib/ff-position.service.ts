@@ -52,8 +52,6 @@ export class FFPositionService implements OnDestroy {
         mergeMap((event) => fromEvent(window, event))
       ).subscribe(() => {
         this._getWindowSize();
-        console.log(this._windowSize);
-
       })
     );
   }

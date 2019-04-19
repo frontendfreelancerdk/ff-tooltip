@@ -1,20 +1,22 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { FfTooltipComponent } from './ff-tooltip.component';
+import {FFTooltipComponent} from './ff-tooltip.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
-describe('FfTooltipComponent', () => {
-  let component: FfTooltipComponent;
-  let fixture: ComponentFixture<FfTooltipComponent>;
+describe('FFTooltipComponent', () => {
+  let component: FFTooltipComponent;
+  let fixture: ComponentFixture<FFTooltipComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FfTooltipComponent ]
+      declarations: [FFTooltipComponent],
+      imports: [BrowserAnimationsModule]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FfTooltipComponent);
+    fixture = TestBed.createComponent(FFTooltipComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

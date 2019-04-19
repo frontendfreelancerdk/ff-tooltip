@@ -1,27 +1,22 @@
-import {Component} from '@angular/core';
+import {AfterViewInit, Component, ViewChild} from '@angular/core';
+import {FFTooltipDirective} from '../../projects/ff-tooltip/src/lib/ff-tooltip.directive';
 
 @Component({
   selector: 'ff-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
-  title = 'ff-tooltip-app';
-  direction = '';
-  text = 'hello';
+export class AppComponent implements AfterViewInit{
+  @ViewChild('tooltip') tooltip: FFTooltipDirective;
 
   constructor() {
-    const pos = ['left', 'top', 'bottom', 'right'];
-    this.direction = pos[0];
-    let i = 1;
-    setInterval(() => {
-      this.direction = pos[i];
-      i + 1 >= pos.length ? i = 0 : i++;
-    }, 22000);
+  }
 
-    setTimeout(() => {
-      this.text = 'world';
-    }, 5000);
-
+  ngAfterViewInit(): void {
+    this.tooltip.text = 'text from component';
+    this.tooltip.position = 'bottom';
+    this.tooltip.showDelay = 500;
+    this.tooltip.hideDelay = 1500;
+    this.tooltip.show();
   }
 }

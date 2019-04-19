@@ -13,7 +13,6 @@ import {tooltipState} from '../animation';
   animations: [tooltipState]
 })
 export class FFTooltipComponent implements AfterViewInit {
-  private eventSubscription: any;
   public afterHide = new BehaviorSubject(false);
   _text = '';
   get text() {
@@ -56,8 +55,6 @@ export class FFTooltipComponent implements AfterViewInit {
   }
 
   constructor(private cdRef: ChangeDetectorRef) {
-    this.eventSubscription = fromEvent(window, 'scroll').subscribe(e => {
-    });
   }
 
   ngAfterViewInit() {

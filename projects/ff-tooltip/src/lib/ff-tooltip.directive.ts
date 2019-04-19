@@ -74,7 +74,7 @@ export class FFTooltipDirective implements AfterViewInit, OnDestroy {
 
   @Input('ffTooltip') set text(text: string) {
     this._text = text;
-    if (!this.text && this._isTooltipVisible()) {
+    if (!this.text && this.isTooltipVisible()) {
       this.hide(0);
     }
     this._changeTooltipText(text);
@@ -93,8 +93,7 @@ export class FFTooltipDirective implements AfterViewInit, OnDestroy {
     this._hideDelay = ms;
   }
 
-  @Input('ffTooltipDisabled')
-  set disabled(value: boolean) {
+  @Input('ffTooltipDisabled') set disabled(value: boolean) {
     this._disabled = value;
     if (this._disabled) {
       this.hide(0);
@@ -129,7 +128,7 @@ export class FFTooltipDirective implements AfterViewInit, OnDestroy {
       clearTimeout(this._hideTimeoutId);
       this._hideTimeoutId = null;
     }
-    if (this.disabled || !this.text || (this._isTooltipVisible() &&
+    if (this.disabled || !this.text || (this.isTooltipVisible() &&
       !this._tooltipInstance._showTimeoutId && !this._tooltipInstance._hideTimeoutId)) {
       return;
     }
@@ -158,10 +157,10 @@ export class FFTooltipDirective implements AfterViewInit, OnDestroy {
   }
 
   toggle(): void {
-    this._isTooltipVisible() ? this.hide() : this.show();
+    this.isTooltipVisible() ? this.hide() : this.show();
   }
 
-  private _isTooltipVisible(): boolean {
+  public isTooltipVisible(): boolean {
     return !!this._tooltipInstance && this._tooltipInstance.isVisible();
   }
 
