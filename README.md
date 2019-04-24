@@ -90,7 +90,7 @@ import {FFTooltipDirective} from 'ff-tooltip';
 
 @Component({
   selector: 'ff-root',
-  templateUrl: './app.component.html',
+  template: '<p ffTooltip #myTooltip="ffTooltip">Lorem ipsum dolor sit amet</p>',
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements AfterViewInit{
@@ -109,11 +109,8 @@ export class AppComponent implements AfterViewInit{
 }
 ```
 
-```html
-<p ffTooltip #myTooltip="ffTooltip">Lorem ipsum dolor sit amet</p>
-```
 ## Api
-```
+```typescript
   @Input('ffTooltip') set text(text: string)
   @Input('ffTooltipPosition') set position(pos: TooltipPosition) 
   @Input('ffTooltipShowDelay') set showDelay(ms: number) 
