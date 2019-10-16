@@ -6,8 +6,8 @@ import {FFTooltipDirective} from '../../projects/ff-tooltip/src/lib/ff-tooltip.d
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements AfterViewInit{
-  @ViewChild('tooltip') tooltip: FFTooltipDirective;
+export class AppComponent implements AfterViewInit {
+  @ViewChild('tooltip', {static: false}) tooltip: FFTooltipDirective;
 
   constructor() {
   }

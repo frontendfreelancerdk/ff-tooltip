@@ -17,7 +17,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
                     [ffTooltipPosition]="'left'">`,
 })
 export class Container {
-  @ViewChild('input') input;
+  @ViewChild('input', {static: true}) input;
 
   test() {
     console.log('input.value', this.input.text);
